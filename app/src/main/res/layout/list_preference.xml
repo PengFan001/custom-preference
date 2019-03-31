@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="139px"
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:id="@+id/list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="30px"
+        android:text="我是标题"
+        android:textSize="23sp"
+        android:textColor="#ffffff"/>
+
+    <RelativeLayout
+        android:id="@+id/summary_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/list_title"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="122dp">
+
+        <ImageButton
+            android:id="@+id/list_left_btn"
+            android:layout_width="6dp"
+            android:layout_height="13dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:layout_alignParentLeft="true"
+            android:background="@mipmap/icon_arrow_left"
+            android:layout_marginLeft="30px"/>
+
+
+        <TextView
+            android:id="@+id/list_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="summary"
+            android:textSize="23sp"
+            android:textColor="#ffffff" />
+
+        <ImageButton
+            android:id="@+id/list_right_btn"
+            android:layout_width="6dp"
+            android:layout_height="13dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:background="@mipmap/icon_arrow_right"/>
+    </RelativeLayout>
+
+</RelativeLayout>

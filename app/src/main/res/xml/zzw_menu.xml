@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="自组网"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    >
+
+    <com.example.zizhuwang.preference.StatusPreference
+        app:status_key="status"
+        app:status_title="状态">
+    </com.example.zizhuwang.preference.StatusPreference>
+
+    <com.example.zizhuwang.preference.ItemPreference
+        app:item_key="params_set"
+        app:item_title="参数设置">
+    </com.example.zizhuwang.preference.ItemPreference>
+
+    <com.example.zizhuwang.preference.ItemPreference
+        app:item_key="internet_info"
+        app:item_title="网络拓扑信息">
+    </com.example.zizhuwang.preference.ItemPreference>
+
+    <com.example.zizhuwang.preference.ItemPreference
+        app:item_key="point_status_info"
+        app:item_title="节点状态信息">
+    </com.example.zizhuwang.preference.ItemPreference>
+
+</PreferenceScreen>
