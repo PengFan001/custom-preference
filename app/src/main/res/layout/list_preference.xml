@@ -22,7 +22,7 @@
         android:layout_toRightOf="@id/list_title"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="122dp">
+        android:layout_marginLeft="262px">
 
         <ImageButton
             android:id="@+id/list_left_btn"

@@ -1,11 +1,7 @@
 package com.example.zizhuwang;
 
 import android.preference.PreferenceActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.example.zizhuwang.preference.ItemPreference;
-import com.example.zizhuwang.preference.StatusPreference;
 
 public class MainActivity extends PreferenceActivity {
 

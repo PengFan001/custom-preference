@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -12,26 +12,10 @@
         <item name="android:windowBackground">@color/backgroundColor</item>
     </style>
 
-    <declare-styleable name="status_preference">
-        <attr name="status_key" format="string"></attr>
-        <attr name="status_title" format="string"></attr>
-    </declare-styleable>
-
-    <declare-styleable name="item_preference">
-        <attr name="item_key" format="string"></attr>
-        <attr name="item_title" format="string"></attr>
-    </declare-styleable>
-
-    <declare-styleable name="edit_preference">
-        <attr name="edit_key" format="string"></attr>
-        <attr name="edit_summary" format="string"></attr>
-        <attr name="edit_title" format="string"></attr>
-    </declare-styleable>
-
-    <declare-styleable name="list_preference">
-        <attr name="list_key" format="string"></attr>
-        <attr name="list_title" format="string"></attr>
-        <attr name="list_summary" format="string"></attr>
-    </declare-styleable>
+    <style name="my_list_dialog" parent="android:Theme.Material.Light.Dialog" tools:targetApi="lollipop">
+        <item name="android:background">@color/backgroundColor</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorAlertDialogListItem">@color/white</item>
+    </style>
 
 </resources>

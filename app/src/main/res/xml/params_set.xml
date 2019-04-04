@@ -1,63 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="参数设置"
     android:layout_width="match_parent"
     android:layout_height="108px">
 
     <com.example.zizhuwang.preference.EditPreference
-        app:edit_key="mac"
-        app:edit_title="MAC地址"
-        app:edit_summary="0">
+        android:key="mac"
+        android:title="MAC地址"
+        android:summary="0">
     </com.example.zizhuwang.preference.EditPreference>
 
     <com.example.zizhuwang.preference.EditPreference
-        app:edit_key="ip"
-        app:edit_title="IP地址"
-        app:edit_summary="172.17.35.1">
+        android:key="ip"
+        android:title="IP地址"
+        android:summary="172.17.35.1">
     </com.example.zizhuwang.preference.EditPreference>
 
-    <com.example.zizhuwang.preference.ListPreference
-        app:list_key="work_model"
-        app:list_title="工作模式"
-        app:list_summary="定频">
-    </com.example.zizhuwang.preference.ListPreference>
+    <com.example.zizhuwang.preference.MyListPreference
+        android:key="work_model"
+        android:title="工作模式"
+        android:summary="定频"
+        android:dialogTitle="工作模式"
+        android:entries="@array/work_model_list_key"
+        android:entryValues="@array/work_model_list_value">
+    </com.example.zizhuwang.preference.MyListPreference>
 
-    <com.example.zizhuwang.preference.ListPreference
-        app:list_key="key_way"
-        app:list_title="明密方式"
-        app:list_summary="明钥">
-    </com.example.zizhuwang.preference.ListPreference>
+    <com.example.zizhuwang.preference.MyListPreference
+        android:key="key_way"
+        android:title="明密方式"
+        android:summary="明钥">
+    </com.example.zizhuwang.preference.MyListPreference>
 
-    <com.example.zizhuwang.preference.ListPreference
-        app:list_key="user_speed"
-        app:list_title="用户速率"
-        app:list_summary="128kbps">
-    </com.example.zizhuwang.preference.ListPreference>
+    <com.example.zizhuwang.preference.MyListPreference
+        android:key="user_speed"
+        android:title="用户速率"
+        android:summary="128kbps"
+        android:dialogTitle="用户速率"
+        android:entries="@array/user_speed_list_key"
+        android:entryValues="@array/user_speed_list_value">
+    </com.example.zizhuwang.preference.MyListPreference>
 
-    <com.example.zizhuwang.preference.ListPreference
-        app:list_key="launch_power"
-        app:list_title="发射功率"
-        app:list_summary="大功率">
-    </com.example.zizhuwang.preference.ListPreference>
+    <com.example.zizhuwang.preference.MyListPreference
+        android:key="launch_power"
+        android:title="发射功率"
+        android:summary="大功率">
+    </com.example.zizhuwang.preference.MyListPreference>
 
-    <com.example.zizhuwang.preference.ListPreference
-        app:list_key="frequency"
-        app:list_title="定频频率"
-        app:list_summary="512">
-    </com.example.zizhuwang.preference.ListPreference>
+    <com.example.zizhuwang.preference.MyListPreference
+        android:key="frequency"
+        android:title="定频频率"
+        android:summary="512">
+    </com.example.zizhuwang.preference.MyListPreference>
 
-    <com.example.zizhuwang.preference.ListPreference
-        app:list_key="table_number"
-        app:list_title="跳频表号"
-        app:list_summary="1">
-    </com.example.zizhuwang.preference.ListPreference>
+    <com.example.zizhuwang.preference.MyListPreference
+        android:key="table_number"
+        android:title="跳频表号"
+        android:summary="1">
+    </com.example.zizhuwang.preference.MyListPreference>
 
     <com.example.zizhuwang.preference.EditPreference
-        app:edit_key="higher_set"
-        app:edit_title="高级设置"
-        app:edit_summary="">
+        android:key="higher_set"
+        android:title="高级设置"
+        android:summary="">
     </com.example.zizhuwang.preference.EditPreference>
 
 </PreferenceScreen>

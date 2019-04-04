@@ -1,16 +1,17 @@
 package com.example.zizhuwang.preference;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.drawable.ColorDrawable;
 import android.preference.EditTextPreference;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,7 +19,9 @@ import android.widget.Toast;
 
 import com.example.zizhuwang.R;
 
-public class EditPreference extends EditTextPreference implements View.OnClickListener {
+import static android.content.ContentValues.TAG;
+
+public class EditPreference extends EditTextPreference implements View.OnClickListener{
 
     private final static String MAC_KEY = "mac";
     private final static String IP_KEY = "ip";
@@ -28,11 +31,7 @@ public class EditPreference extends EditTextPreference implements View.OnClickLi
     private TextView tvSummary;
     private ImageButton ibRightBtn;
 
-    private String title;
-    private String summary;
-    private String key;
-
-    private Dialog editDialog;
+    private Dialog dialog;
     private TextView tvEditedDialogTitle;
     private EditText etEditedDialogContent;
     private TextView tvEditedDialogOk;
@@ -48,12 +47,6 @@ public class EditPreference extends EditTextPreference implements View.OnClickLi
 
     public EditPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.edit_preference);
-        title = typedArray.getString(R.styleable.edit_preference_edit_title);
-        key = typedArray.getString(R.styleable.edit_preference_edit_key);
-        summary = typedArray.getString(R.styleable.edit_preference_edit_summary);
-        super.setKey(key);
-        typedArray.recycle();
     }
 
     @Override
@@ -66,74 +59,107 @@ public class EditPreference extends EditTextPreference implements View.OnClickLi
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
+        String saveValue = getSharedPreferences().getString(getKey(), "");
         tvTitle = view.findViewById(R.id.edit_title);
         tvSummary = view.findViewById(R.id.edit_summary);
         ibRightBtn = view.findViewById(R.id.edit_btn);
-        tvTitle.setText(title);
-        tvSummary.setText(summary);
+        tvTitle.setText(getTitle());
+//        tvSummary.setText(getSummary());
+        if (!TextUtils.isEmpty(saveValue)) {
+            tvSummary.setText(saveValue);
+        }else {
+            tvSummary.setText(getSummary());
+        }
         view.setOnClickListener(this);
+    }
 
-        //todo the function of input dialog
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        switch (getKey()){
+            case MAC_KEY:
+                //todo add the inputDialog
+                showMACDialog();
+                break;
+            case IP_KEY:
+                //todo add the inputDialog
+                showIPDialog();
+                break;
+            case HIGHER_SET_KEY:
+                Toast.makeText(getContext(), getTitle(), Toast.LENGTH_SHORT).show();
+                //todo add the intent
+                break;
+        }
+    }
+
+    private void showMACDialog(){
+        String currentValue = getSharedPreferences().getString(getKey(), "");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final View editDialogView = LayoutInflater.from(getContext()).inflate(R.layout.edit_dialog, null);
-        editDialog = new Dialog(getContext());
-        editDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        editDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        editDialog.setContentView(editDialogView);
-
         tvEditedDialogTitle = editDialogView.findViewById(R.id.edit_dialog_title);
+        etEditedDialogContent = editDialogView.findViewById(R.id.edit_dialog_content);
         tvEditedDialogOk = editDialogView.findViewById(R.id.edit_dialog_ok);
         tvEditedDialogCancel = editDialogView.findViewById(R.id.edit_dialog_cancel);
-        tvEditedDialogTitle.setText(title);
-
+        tvEditedDialogTitle.setText(getTitle());
+        etEditedDialogContent.setText(currentValue);
+        etEditedDialogContent.setSelection(currentValue.length());
+        etEditedDialogContent.requestFocus();
+        dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setContentView(editDialogView);
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         tvEditedDialogOk.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                etEditedDialogContent = editDialogView.findViewById(R.id.edit_dialog_content);
-                summary = etEditedDialogContent.getText().toString();
-                setSummary(summary);
-                tvSummary.setText(summary);
-                editDialog.dismiss();
+            public void onClick(View view) {
+                getSharedPreferences().edit().putString(getKey(), etEditedDialogContent.getText().toString()).commit();
+                tvSummary.setText(etEditedDialogContent.getText().toString());
+                Log.d(TAG, "onClick: "+etEditedDialogContent.getText().toString());
+                dialog.dismiss();
             }
         });
 
         tvEditedDialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                editDialog.dismiss();
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "cancel", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }
 
-//    @Override
-//    protected View onCreateDialogView() {
-//        super.onCreateDialogView();
-//        View view = LayoutInflater.from(getContext()).inflate(R.layout.edit_dialog, null);
-//        return view;
-//    }
-//
-//    @Override
-//    protected void onBindDialogView(View view) {
-//        super.onBindDialogView(view);
-//
-//    }
+    private void showIPDialog(){
+        String currentValue = getSharedPreferences().getString(getKey(), "");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final View editDialogView = LayoutInflater.from(getContext()).inflate(R.layout.ip_edit_dialog, null);
+        tvEditedDialogTitle = editDialogView.findViewById(R.id.ip_edit_dialog_title);
+        etEditedDialogContent = editDialogView.findViewById(R.id.ip_edit_dialog_content);
+        tvEditedDialogOk = editDialogView.findViewById(R.id.ip_edit_dialog_ok);
+        tvEditedDialogCancel = editDialogView.findViewById(R.id.ip_edit_dialog_cancel);
+        tvEditedDialogTitle.setText(getTitle());
+        etEditedDialogContent.setText(currentValue);
+        etEditedDialogContent.setSelection(currentValue.length());
+        etEditedDialogContent.requestFocus();
+        dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setContentView(editDialogView);
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        tvEditedDialogOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSharedPreferences().edit().putString(getKey(), etEditedDialogContent.getText().toString()).commit();
+                tvSummary.setText(etEditedDialogContent.getText().toString());
+                Log.d(TAG, "onClick: "+etEditedDialogContent.getText().toString());
+                dialog.dismiss();
+            }
+        });
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent();
-        switch (key){
-            case MAC_KEY:
-                editDialog.show();
-                break;
-            case IP_KEY:
-                editDialog.show();
-                break;
-            case HIGHER_SET_KEY:
-                Toast.makeText(getContext(), title, Toast.LENGTH_SHORT).show();
-                //todo add the intent
-//                intent.setClass();
-//                getContext().startActivity(intent);
-                break;
-        }
-
+        tvEditedDialogCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "cancel", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
     }
+
 }

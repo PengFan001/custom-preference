@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="work_model_list_key">
+        <item>定频</item>
+        <item>跳频</item>
+    </string-array>
+    <string-array name="work_model_list_value">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="user_speed_list_key">
+        <item>128kbps</item>
+        <item>256kbps</item>
+        <item>512kbps</item>
+        <item>2048kbps</item>
+        <item>4Mbps</item>
+    </string-array>
+
+    <string-array name="user_speed_list_value">
+        <item>2</item>
+        <item>3</item>
+        <item>6</item>
+        <item>12</item>
+        <item>21</item>
+    </string-array>
+</resources>

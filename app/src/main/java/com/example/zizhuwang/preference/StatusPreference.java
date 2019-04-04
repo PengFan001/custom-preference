@@ -1,7 +1,6 @@
 package com.example.zizhuwang.preference;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -20,10 +19,6 @@ public class StatusPreference extends Preference implements View.OnClickListener
     private TextView tvTitle;
     private CheckBox cb_status_btn;
 
-    private String title;
-    private String key;
-
-
     public StatusPreference(Context context) {
         this(context, null);
     }
@@ -34,11 +29,6 @@ public class StatusPreference extends Preference implements View.OnClickListener
 
     public StatusPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.status_preference);
-        title = typedArray.getString(R.styleable.status_preference_status_title);
-        key = typedArray.getString(R.styleable.status_preference_status_key);
-        super.setKey(key);
-        typedArray.recycle();
     }
 
     @Override
@@ -53,7 +43,7 @@ public class StatusPreference extends Preference implements View.OnClickListener
         super.onBindView(view);
         tvTitle = view.findViewById(R.id.status_title);
         cb_status_btn = view.findViewById(R.id.cb_btn);
-        tvTitle.setText(title);
+        tvTitle.setText(getTitle());
 
         cb_status_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -74,7 +64,7 @@ public class StatusPreference extends Preference implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(getContext(), title, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getTitle(), Toast.LENGTH_SHORT).show();
         Log.i("click", "onClick: status");
     }
 }

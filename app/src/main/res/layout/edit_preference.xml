@@ -22,7 +22,7 @@
         android:layout_toRightOf="@id/edit_title"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="100dp">
+        android:layout_marginLeft="314px">
 
         <TextView
             android:id="@+id/edit_summary"
